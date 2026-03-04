@@ -1,33 +1,33 @@
+### Spring Boot & Maven ###
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+### Tailwind CSS & Frontend ###
+# Ignora o binário de 114MB que causou o erro no Git
+tailwind
+# Ignora as dependências do Node caso você use npm no futuro
+node_modules/
+package-lock.json
+# Ignora o arquivo de saída gerado (ele será recriado pelo script de build)
+src/main/resources/static/css/output.css
 
-### IntelliJ IDEA ###
-.idea
+### IDEs (IntelliJ, VS Code, STS) ###
+.idea/
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
 .vscode/
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+### Sistema Operacional (Arch Linux) ###
+.DS_Store
+Thumbs.db
+*.swp
+*~
