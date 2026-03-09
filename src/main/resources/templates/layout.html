@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Portal Olímpico</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+
+  <body class="bg-gray-100 font-sans">
+    <!-- NAVBAR -->
+    <nav class="bg-white shadow">
+      <div
+        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl font-bold text-blue-700">Portal Olímpico</h1>
+
+        <div class="space-x-6 text-gray-600">
+          <a href="#" class="hover:text-blue-600">Home</a>
+          <a href="#" class="hover:text-blue-600">Modalidades</a>
+          <a href="#" class="hover:text-blue-600">Contato</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTEÚDO DA PÁGINA -->
+    <main th:replace="${content}"></main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white text-center py-6">
+      <p>© 2026 Portal Olímpico</p>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
