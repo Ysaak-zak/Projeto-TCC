@@ -1,11 +1,6 @@
 package com.api.Projeto_3.model;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,40 +24,31 @@ public class PerfisModelo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id; 
 
-    @Lob
-    private byte[] fotoImg;
-    
+   @Column(name = "foto_url")
+    private String fotoImg;
+
     @Column(name = "per_nome" , nullable = false  , length =50)
     private String name;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // ADICIONE ESTA LINHA AQUI
-    @Column(name = "per_datNascimento" )
-    private Date dataNascimento;
+  
+    @Column(name = "data_nascimento")
+    private String dataNascimento;
 
-    @Column(name = "per_cpf")
     private String cpf;
 
-    @Column(name = "per_rg")
     private String rg;
     
-    @Column(name = "per_emial" )
     private String email;
 
-    @Column(name = "per_senha" )
     private String senha;
 
 
-    @Column(name = "per_telefoneFixo")
     private String telefoneFixo;
 
-    @Column(name = "per_telefoneZap")
     private String telefoneZap;
 
-    @Column(name = "per_PesoMigrama")
     private String pesoMigrama;
 
-    @Column(name = "per_altura")
     private String  alturaCetimentro;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -74,16 +60,13 @@ public class PerfisModelo implements Serializable {
     private MoradiaModel moradia_fk;
 
 
-    
-    
-
-
     public PerfisModelo() {
     }
 
 
 
-    public PerfisModelo(Long id, byte[] fotoImg, String name, Date dataNascimento, String cpf, String rg, String email,
+    public PerfisModelo(Long id, String fotoImg, String name, 
+        String dataNascimento, String cpf, String rg, String email,
             String senha, String telefoneFixo, String telefoneZap, String pesoMigrama, String  alturaCetimentro,
             AfiliacaoModelo pais_fk, MoradiaModel moradia_fk) {
         this.id = id;
@@ -110,11 +93,11 @@ public class PerfisModelo implements Serializable {
         this.id = id;
     }
 
-    public byte[] getFotoImg() {
+    public String getFotoImg() {
         return fotoImg;
     }
 
-    public void setFotoImg(byte[] fotoImg) {
+    public void setFotoImg(String fotoImg) {
         this.fotoImg = fotoImg;
     }
 
@@ -126,11 +109,11 @@ public class PerfisModelo implements Serializable {
         this.name = name;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

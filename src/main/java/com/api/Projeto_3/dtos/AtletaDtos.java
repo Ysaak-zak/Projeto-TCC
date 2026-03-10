@@ -1,20 +1,14 @@
 package com.api.Projeto_3.dtos;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.api.Projeto_3.model.AtletaModelo;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AtletaDtos {
    private Long id;  
-    private byte[] fotoImg;
-    private String name;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // ESSENCIAL para formulários
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date dataNascimento;
+    private String name;
+    private String dataNascimento;
     private String cpf;
     private String rg;
     private String email;
@@ -22,11 +16,10 @@ public class AtletaDtos {
     private String telefoneFixo;
     private String telefoneZap;
     private String pesoMigrama;
-    private String alturaCetimentro;
-    
-  
-    private AfiliacaoDtos pais_fk;
+    private String alturaCetimentro;  
+    private AfiliacaoDtos pais_fk;  
     private MoradiaDto moradia_fk;
+    private MultipartFile imagem;
 
     public AtletaDtos() {
     }
@@ -34,7 +27,6 @@ public class AtletaDtos {
 
     public AtletaDtos(AtletaModelo atl) {
         this.id = atl.getId();
-        this.fotoImg = atl.getFotoImg();
         this.name = atl.getName();
         this.dataNascimento = atl.getDataNascimento();
         this.cpf = atl.getCpf();
@@ -43,8 +35,9 @@ public class AtletaDtos {
         this.senha = atl.getSenha();
         this.telefoneFixo = atl.getTelefoneFixo();
         this.telefoneZap = atl.getTelefoneZap();
-        this.pesoMigrama =  String.valueOf(atl.getPesoMigrama());
-        this.alturaCetimentro = String.valueOf(atl.getAlturaCetimentro());
+        this.pesoMigrama =  atl.getPesoMigrama();
+        this.alturaCetimentro = atl.getAlturaCetimentro();
+      
        
         
     if (atl.getPais_fk() != null) {
@@ -70,15 +63,6 @@ public class AtletaDtos {
 
 
 
-    public byte[] getFotoImg() {
-        return fotoImg;
-    }
-
-
-
-    public void setFotoImg(byte[] fotoImg) {
-        this.fotoImg = fotoImg;
-    }
 
 
 
@@ -94,13 +78,13 @@ public class AtletaDtos {
 
 
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
 
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -225,7 +209,23 @@ public class AtletaDtos {
     }
 
 
+    public MultipartFile getImagem() {
+        return imagem;
+    }
 
+
+    public void setImagem(MultipartFile imagem) {
+        this.imagem = imagem;
+    }
+
+
+
+
+   
+
+
+
+    
     
 
 }

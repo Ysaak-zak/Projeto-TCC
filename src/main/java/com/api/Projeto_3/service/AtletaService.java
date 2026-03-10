@@ -1,7 +1,14 @@
 package com.api.Projeto_3.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.api.Projeto_3.dtos.AfiliacaoDtos;
 import com.api.Projeto_3.dtos.AtletaDtos;
@@ -19,49 +26,51 @@ public class AtletaService {
     @Autowired
     AtletaRespository respository;
 
+  
+    private static String caminho = "/home/ysaak/FACULDADE/PROJETO_TCC/api/Projeto-TCC/uplods";
+
     @Transactional
-    public AtletaDtos InsertAtleta(AtletaDtos dtos){
-
-            AtletaModelo en = new AtletaModelo();
+    public AtletaDtos InsertAtleta(AtletaDtos dtos , MultipartFile file){
+            AtletaModelo atl = new AtletaModelo();
            
-            salvarAtleta(en, dtos);
-            //parte dos DTOS AFILIADOS
-            salvarAfiliado(dtos.getPais_fk(), en);
-            //salvado Atleta
-            salvarMoradia(dtos.getMoradia_fk(), en);
+            salvarAtleta(atl, dtos);
+          
+            salvarAfiliado(dtos.getPais_fk(), atl);
+            salvarMoradia(dtos.getMoradia_fk(), atl);
+            salvaImg(dtos , file , atl);
+            
+            respository.save(atl);
 
-            respository.save(en);
-
-           return new AtletaDtos(en);
+           return new AtletaDtos(atl);
     }
 
     //SALVANDO ATLETAS
 
-    private void salvarAtleta( AtletaModelo en , AtletaDtos dtos){
+    private void salvarAtleta( AtletaModelo atl , AtletaDtos dtos){
 
-         en.setFotoImg(dtos.getFotoImg());
-            en.setName(dtos.getName());
-            en.setDataNascimento(dtos.getDataNascimento());
-            en.setCpf(dtos.getCpf());
-            en.setRg(dtos.getRg());
-            en.setEmail(dtos.getEmail());
-            en.setSenha(dtos.getSenha());
-            en.setTelefoneFixo(dtos.getTelefoneFixo());
-            en.setTelefoneZap(dtos.getTelefoneZap());
-            en.setPesoMigrama(dtos.getPesoMigrama());
-            en.setAlturaCetimentro(dtos.getAlturaCetimentro());
+           
+            atl.setName(dtos.getName());
+            atl.setDataNascimento(dtos.getDataNascimento());
+            atl.setCpf(dtos.getCpf());
+            atl.setRg(dtos.getRg());
+            atl.setEmail(dtos.getEmail());
+            atl.setSenha(dtos.getSenha());
+            atl.setTelefoneFixo(dtos.getTelefoneFixo());
+            atl.setTelefoneZap(dtos.getTelefoneZap());
+            atl.setPesoMigrama(dtos.getPesoMigrama());
+            atl.setAlturaCetimentro(dtos.getAlturaCetimentro());
     }
 
     //SALVANDOS OS AFILIADOS
-    private void salvarAfiliado(AfiliacaoDtos en , AtletaModelo atl){
+    private void salvarAfiliado(AfiliacaoDtos afi , AtletaModelo atl){
           AfiliacaoModelo pais = new AfiliacaoModelo();
 
-            pais.setMaeNome(en.getMaeNome());
-            pais.setMaeTelefone(en.getMaeTelefone());
-            pais.setMaeEmail(en.getMaeEmail());
-            pais.setPaiName(en.getPaiName());
-            pais.setPaiTelefone(en.getPaiTelefone());
-            pais.setPaiEmail(en.getPaiEmail());
+            pais.setMaeNome(afi.getMaeNome());
+            pais.setMaeTelefone(afi.getMaeTelefone());
+            pais.setMaeEmail(afi.getMaeEmail());
+            pais.setPaiName(afi.getPaiName());
+            pais.setPaiTelefone(afi.getPaiTelefone());
+            pais.setPaiEmail(afi.getPaiEmail());
 
 
             atl.setPais(pais);
@@ -82,4 +91,31 @@ public class AtletaService {
            atl.setMoradia_fk(mor);
 
     }
-}
+
+  
+    
+    //img
+
+    private void salvaImg(AtletaDtos dos , MultipartFile ar , AtletaModelo atl){
+        try {
+                if(!ar.isEmpty()){
+                    byte[] bytesImg = ar.getBytes();
+                    Path path = Paths.get(caminho+String.valueOf(atl.getId()+ar.getOriginalFilename()));
+                    Files.write(path, bytesImg);
+
+                    atl.setFotoImg(String.valueOf(atl.getId())+ ar.getOriginalFilename());
+
+                    
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+
+
+
+    }
+
+    
+ 

@@ -14,7 +14,7 @@ public AtletaModelo() {
         super();
     }
 
-    public AtletaModelo(Long id, byte[] fotoImg, String name, Date dataNascimento, String cpf, String rg, String email,
+    public AtletaModelo(Long id, String fotoImg, String name, String dataNascimento, String cpf, String rg, String email,
             String senha, String telefoneFixo, String telefoneZap, String pesoMigrama, String alturaCetimentro,
             AfiliacaoModelo pais, MoradiaModel moradia_fk) {
         
