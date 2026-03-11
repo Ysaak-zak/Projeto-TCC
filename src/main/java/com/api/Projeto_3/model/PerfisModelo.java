@@ -27,7 +27,7 @@ public class PerfisModelo implements Serializable {
    @Column(name = "foto_url")
     private String fotoImg;
 
-    @Column(name = "per_nome" , nullable = false  , length =50)
+    @Column(name = "per_nome" , length =50)
     private String name;
 
   

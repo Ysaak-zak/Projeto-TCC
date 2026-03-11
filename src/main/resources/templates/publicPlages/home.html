@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Olímpico Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" th:href="@{/img/iconFun.png}">
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <nav class="bg-white shadow">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-700">GERENCIAMENTO DE ATLETA </h1>
+        <div class="space-x-6 text-gray-600">
+          <a href="#" class="hover:text-blue-600">Home</a>
+          <a href="#" class="hover:text-blue-600">Modalidades</a>
+          <a href="#" class="hover:text-blue-600">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 text-white py-24">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-5xl font-bold mb-6">Gestão Olímpica Integrada</h2>
+        <p class="text-xl mb-8">Sistema para atletas, treinadores e equipe médica</p>
+          <a href="modalidades.html" class="bg-amber-500 text-black px-16 py-3 font-extrabold rounded-2xl hover:bg-amber-300 hover:text-amber-50 duration-500">
+              Logar no perfil
+          </a>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-bold text-center mb-12">Portais de Acesso</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    
+    <a th:href="@{/cadastro/atleta}" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-blue-500 hover:shadow-xl transition">
+    <div class="flex justify-center mb-4 text-blue-600">
+        <img th:src="@{/img/atletaNav.png}" alt="" class="w-20">
+    </div>
+    <h3 class="text-xl font-semibold text-center text-gray-900">Criar Atleta</h3>
+    <p class="text-gray-500 text-center mt-2">Treinos e resultados</p>
+</a>
+
+    <a href="/cadastro-medico" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-red-500 hover:shadow-xl transition">
+      <div class="flex justify-center mb-4 text-red-500">
+       <img th:src="@{img/medico.png}" alt="" class="w-20">
+      </div>
+      <h3 class="text-xl font-semibold text-center text-gray-900">Criar Médica</h3>
+      <p class="text-gray-500 text-center mt-2">Monitoramento clínico</p>
+    </a>
+
+    <a href="/cadastro-treinador" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-green-500 hover:shadow-xl transition">
+      <div class="flex justify-center mb-4 text-green-600">
+        <img th:src="@{img/treinador.png}" alt="" class="w-20">
+      </div>
+      <h3 class="text-xl font-semibold text-center text-gray-900">Criar Treinador</h3>
+      <p class="text-gray-500 text-center mt-2">Gestão da equipe</p>
+    </a>
+
+  </div>
+</section>
+
+    <section class="bg-white py-16">
+      <div class="max-w-6xl mx-auto px-6 flex gap-8">
+        
+        <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/natacao.png}" class="w-8" alt="">
+              <p>Natação</p>
+          </div>
+          <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/atletismo.png}" class="w-8" alt="">
+              <p>Atletismo</p>
+          </div>
+           <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/basquetebol.png}" class="w-8" alt="">
+              <p>Basquebol</p>
+          </div>
+           <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/corrida.png}" class="w-8" alt="">
+              <p>Ciclismo</p>
+          </div>
+         <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/voleibol.png}" class="w-8" alt="">
+              <p>Voleibol</p>
+          </div>
+          <div class="border border-blue-500 p-6 rounded-lg flex items-center justify-center text-center gap-2">
+              <img th:src="@{img/esgrima.png}" class="w-8" alt="">
+              <p>Esgrima</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white text-center py-6">
+      <p>© 2026 Portal Olímpico</p>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

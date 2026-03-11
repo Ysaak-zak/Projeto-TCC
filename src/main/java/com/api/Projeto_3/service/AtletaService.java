@@ -1,12 +1,10 @@
 package com.api.Projeto_3.service;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,14 +28,13 @@ public class AtletaService {
     private static String caminho = "/home/ysaak/FACULDADE/PROJETO_TCC/api/Projeto-TCC/uplods";
 
     @Transactional
-    public AtletaDtos InsertAtleta(AtletaDtos dtos , MultipartFile file){
+    public AtletaDtos InsertAtleta(AtletaDtos dtos ){
             AtletaModelo atl = new AtletaModelo();
            
             salvarAtleta(atl, dtos);
           
             salvarAfiliado(dtos.getPais_fk(), atl);
             salvarMoradia(dtos.getMoradia_fk(), atl);
-            salvaImg(dtos , file , atl);
             
             respository.save(atl);
 

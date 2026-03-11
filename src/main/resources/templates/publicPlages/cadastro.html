@@ -13,8 +13,8 @@
       
       <!--TUDO QUE TA NO (atletaDto Prentence a esse formulario então não preicsa obj.name)-->
 
-      <main class="flex flex-col  w-full  items-center border min-h-screen ">
-         <form th:action="@{/atleta/save}" th:object="${atletaDtos}" class="flex flex-col gap-10" method="post" enctype="multipart/form-data">
+      <main class="flex flex-col  w-full  items-center  min-h-screen ">
+         <form th:action="@{/atleta/save}" th:object="${atletaDtos}" class="flex flex-col gap-10" method="post">
                 
                 <!--CADASTRO  PREMEIRA PARTE-->
                <section class="flex bg-gray-50/60 py-14 px-10 rounded-2xl gap-12 mr-auto w-full ">
@@ -47,7 +47,7 @@
                <!--CADASTRO  PREMEIRA PARTE-->
 
                <!--PARTE DOIS DOS CAMPOS-->
-                <section class="flex flex-col bg-gray-50 py-12 px-10 gap-7 w-full rounded-2xl shadow-2xl shadow-sky-600">
+                <section class="flex flex-col bg-gray-50 py-12 px-10 gap-7 w-full rounded-2xl  ">
                     <div class="flex gap-3">
                             <img th:src="@{img/documento.svg}" alt="">
                             <p class="text-2xl font-extrabold">DADOS PESSOAS </p>
