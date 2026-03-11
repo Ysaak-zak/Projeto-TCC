@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Acessar Portal</title>
+      <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <html xmlns:th="http://www.thymeleaf.org"></html>
+     <link rel="icon" th:href="@{/img/iconFun.png}">
+</head>
+<body>
+
+    <main class="login-container">
+        <section class="login-form-side">
+            <h1>Acessar - Portal</h1>
+            <div class="underline"></div>
+
+            <form action="#">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Palavra-Chave</label>
+                    <input type="password" id="password" placeholder="" required>
+                </div>
+
+                <button type="submit" class="btn-entrar">Entrar</button>
+
+                <div class="forgot-password">
+                    <a href="#">Esqueceu sua senha?</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="login-image-side"></section>
+    </main>
+
+</body>
+</html>

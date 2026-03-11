@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/css/output.css}" rel="stylesheet">
+     <link rel="icon" th:href="@{/img/iconFun.png}">
    
 
 <body class="flex flex-col gap-4 font-serif">
 
-      <header class="bg-sky-500 py-5 text-3xl  text-center text-amber-50 font-extrabold">CADASTRO DE ATLETA</header>
+    <header class="bg-sky-500 py-5 grid grid-cols-3 items-center px-8">
+    <div class="flex justify-start">
+      <a th:href="@{/home}">
+          <img class="w-8 " th:src="@{/img/sairHome.svg}">
+      </a>
+    </div>
+
+    <p class="text-center font-extrabold text-white text-2xl whitespace-nowrap">
+        CADASTRO DE ATLETA
+    </p>
+
+    <div></div>
+</header>
       
       
       <!--TUDO QUE TA NO (atletaDto Prentence a esse formulario então não preicsa obj.name)-->
@@ -17,7 +30,7 @@
          <form th:action="@{/atleta/save}" th:object="${atletaDtos}" class="flex flex-col gap-10" method="post">
                 
                 <!--CADASTRO  PREMEIRA PARTE-->
-               <section class="flex bg-gray-50/60 py-14 px-10 rounded-2xl gap-12 mr-auto w-full ">
+               <nav class="flex bg-gray-50/60 py-14 px-10 rounded-2xl gap-12 mr-auto w-full shadow shadow-2xl ">
                      <section class="w-full">
                         <label for="foto-upload" 
                             class="flex flex-col gap-2 border-2 border-gray-500 items-center py-10 px-28 rounded-2xl border-dashed border-4 cursor-pointer hover:bg-gray-100 duration-300">
@@ -43,11 +56,11 @@
                             <p class="font-bold text-gray-500">TREINADOR</p>
                         </a>
                 </section>
-               </section>
+            </nav>
                <!--CADASTRO  PREMEIRA PARTE-->
 
                <!--PARTE DOIS DOS CAMPOS-->
-                <section class="flex flex-col bg-gray-50 py-12 px-10 gap-7 w-full rounded-2xl  ">
+                <section class="flex flex-col bg-gray-50 py-12 px-10 gap-7 w-full rounded-2xl shadow shadow-2xl ">
                     <div class="flex gap-3">
                             <img th:src="@{img/documento.svg}" alt="">
                             <p class="text-2xl font-extrabold">DADOS PESSOAS </p>
@@ -80,13 +93,10 @@
                         </div>
 
                           <div class="w-full flex flex-col gap-1.5">
-                             <p class="text-2xl font-extrabold  mr-7 text-gray-400">DATA DE NASCIMENTO</p>
-                            <select name="" id=""  class=" py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
-                                <option value="" disabled>SELECIONE</option>
-                                <option value="" >MASCULINO</option>
-                                <option value="" >FEMINO</option>
-
-                            </select>
+                             <p class="text-2xl font-extrabold  mr-7 text-gray-400">SELECIONE O GENERO</p>
+                             <select th:field="*{genero}" class="py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
+                                       <option th:each="s : ${listEnumGenero}" th:value="${s}" th:text="${s.name}"></option>
+                                    </select>
                         </div>
 
 
@@ -179,11 +189,16 @@
                             <input th:field="*{moradia_fk.cidade}"  type="text" name="" placeholder="Nome da cidade" id="" class=" py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
                         </div>
 
-
-                         <div class="w-1/6 flex flex-col gap-1.5">
-                            <p class="text-2xl font-extrabold  mr-7 text-gray-400">UF</p>
-                            <input  type="text" name="" placeholder="Ex:" id="" class=" py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
-                        </div>
+                            <div class="w-1/6 flex flex-col gap-1.5">
+                                    <p class="text-2xl font-extrabold mr-7 text-gray-400">UF</p>
+                                    <select th:field="*{ufDtos}" class="py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
+                                        <option value="">--</option>
+                                        <option th:each="uf : ${listaUfs}" 
+                                                th:value="${uf}" 
+                                                th:text="${uf.sigla}">
+                                            </option>
+                                    </select>
+                            </div>
 
                         
                           
@@ -209,30 +224,24 @@
                         
                     
                         <div class="w-full flex flex-col gap-1.5">
-                            <p class="text-2xl font-extrabold  mr-7 text-gray-400">ALTURA , (M)</p>
+                            <p class="text-2xl font-extrabold  mr-7 text-gray-400">Altura Centímetro</p>
                             <input th:field="*{alturaCetimentro}"  type="text" name="" placeholder="Nome da rua" id="" class=" py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
                         </div>
 
                          <div class="w-full flex flex-col gap-1.5">
-                            <p class="text-2xl font-extrabold  mr-7 text-gray-400"> PESO , (KG)</p>
+                            <p class="text-2xl font-extrabold  mr-7 text-gray-400"> Peso Kilograma</p>
                             <input th:field="*{pesoMigrama}" type="text" name="" placeholder="Nome da rua" id="" class=" py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
                         </div>
 
                          <div class="w-full flex flex-col gap-1.5">
                             <p class="text-2xl font-extrabold  mr-7 text-gray-400">Tipo Sanguíneo</p>
                          
-                            <select id="tipo-sangue" name="tipo-sangue" class="py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
-                                    <option value="">Selecione...</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
+                            <select th:field="*{sangue}" id="tipo-sangue" name="tipo-sangue" class="py-3 px-3 rounded-2xl text-2xl border-4 border-sky-500">
+                                    <option value="" class="disabled">Selecione...</option>
+                                    <option th:each="s : ${listSague}" th:value="${s}" th:text="${s.descricao}"></option>
                             </select>
-                                                    </div>
+                         </div>
+
 
                          <div class="w-full flex flex-col gap-1.5">
                             <p class="text-2xl font-extrabold  mr-7 text-gray-400"> RUA / AVENIDA</p>

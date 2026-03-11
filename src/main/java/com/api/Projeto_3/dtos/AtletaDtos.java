@@ -2,7 +2,11 @@ package com.api.Projeto_3.dtos;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.api.Projeto_3.dtos.enumDtos.EnumTipoSangue;
 import com.api.Projeto_3.model.AtletaModelo;
+import com.api.Projeto_3.model.enums.EnumUf;
+import com.api.Projeto_3.model.enums.EnumGenero;
+import com.api.Projeto_3.model.enums.EnumSague;
 
 public class AtletaDtos {
    private Long id;  
@@ -19,7 +23,9 @@ public class AtletaDtos {
     private String alturaCetimentro;  
     private AfiliacaoDtos pais_fk;  
     private MoradiaDto moradia_fk;
-    private MultipartFile imagem;
+    private EnumUf ufDtos;
+    private EnumGenero genero;
+    private EnumSague sangue;
 
     public AtletaDtos() {
     }
@@ -37,15 +43,14 @@ public class AtletaDtos {
         this.telefoneZap = atl.getTelefoneZap();
         this.pesoMigrama =  atl.getPesoMigrama();
         this.alturaCetimentro = atl.getAlturaCetimentro();
-      
-       
-        
-    if (atl.getPais_fk() != null) {
         this.pais_fk = new AfiliacaoDtos(atl.getPais_fk()); 
-    }
-    if (atl.getMoradia_fk() != null) {
         this.moradia_fk = new MoradiaDto(atl.getMoradia_fk());
-    }
+        this.ufDtos = atl.getUf();
+        this.genero = atl.getSexo();
+        this.sangue = atl.getSangue();
+
+    
+
     
     }
 
@@ -209,20 +214,34 @@ public class AtletaDtos {
     }
 
 
-    public MultipartFile getImagem() {
-        return imagem;
+    public EnumUf getUfDtos() {
+        return ufDtos;
     }
 
 
-    public void setImagem(MultipartFile imagem) {
-        this.imagem = imagem;
+    public void setUfDtos(EnumUf ufDtos) {
+        this.ufDtos = ufDtos;
     }
 
 
+    public EnumGenero getGenero() {
+        return genero;
+    }
 
 
-   
+    public void setGenero(EnumGenero genero) {
+        this.genero = genero;
+    }
 
+
+    public EnumSague getSangue() {
+        return sangue;
+    }
+
+
+    public void setSangue(EnumSague sangue) {
+        this.sangue = sangue;
+    }
 
 
     

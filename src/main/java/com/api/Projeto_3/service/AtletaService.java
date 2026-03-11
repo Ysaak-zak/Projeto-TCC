@@ -1,12 +1,7 @@
 package com.api.Projeto_3.service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.api.Projeto_3.dtos.AfiliacaoDtos;
 import com.api.Projeto_3.dtos.AtletaDtos;
@@ -55,7 +50,10 @@ public class AtletaService {
             atl.setTelefoneFixo(dtos.getTelefoneFixo());
             atl.setTelefoneZap(dtos.getTelefoneZap());
             atl.setPesoMigrama(dtos.getPesoMigrama());
+            atl.setUf(dtos.getUfDtos());
             atl.setAlturaCetimentro(dtos.getAlturaCetimentro());
+            atl.setSangue(dtos.getSangue());
+            atl.setSexo(dtos.getGenero());
     }
 
     //SALVANDOS OS AFILIADOS
@@ -90,24 +88,7 @@ public class AtletaService {
     }
 
   
-    
-    //img
 
-    private void salvaImg(AtletaDtos dos , MultipartFile ar , AtletaModelo atl){
-        try {
-                if(!ar.isEmpty()){
-                    byte[] bytesImg = ar.getBytes();
-                    Path path = Paths.get(caminho+String.valueOf(atl.getId()+ar.getOriginalFilename()));
-                    Files.write(path, bytesImg);
-
-                    atl.setFotoImg(String.valueOf(atl.getId())+ ar.getOriginalFilename());
-
-                    
-                }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     
 
 

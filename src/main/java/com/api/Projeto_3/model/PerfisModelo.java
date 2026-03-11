@@ -2,16 +2,21 @@ package com.api.Projeto_3.model;
 
 import java.io.Serializable;
 
+import com.api.Projeto_3.model.enums.EnumUf;
+import com.api.Projeto_3.model.enums.EnumSague;
+import com.api.Projeto_3.model.enums.EnumGenero;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -51,6 +56,15 @@ public class PerfisModelo implements Serializable {
 
     private String  alturaCetimentro;
 
+    @Enumerated(EnumType.STRING)
+    private EnumUf uf;
+
+    @Enumerated(EnumType.STRING)
+    private EnumGenero sexo;
+    
+     @Enumerated(EnumType.STRING)
+    private EnumSague sangue;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fal_fk" , unique = true )
     private AfiliacaoModelo pais_fk;
@@ -64,11 +78,10 @@ public class PerfisModelo implements Serializable {
     }
 
 
-
-    public PerfisModelo(Long id, String fotoImg, String name, 
-        String dataNascimento, String cpf, String rg, String email,
-            String senha, String telefoneFixo, String telefoneZap, String pesoMigrama, String  alturaCetimentro,
-            AfiliacaoModelo pais_fk, MoradiaModel moradia_fk) {
+    public PerfisModelo(Long id, String fotoImg, String name, String dataNascimento, String cpf, String rg,
+            String email, String senha, String telefoneFixo, String telefoneZap, String pesoMigrama,
+            String alturaCetimentro, EnumUf uf, EnumGenero sexo, EnumSague sangue, AfiliacaoModelo pais_fk,
+            MoradiaModel moradia_fk) {
         this.id = id;
         this.fotoImg = fotoImg;
         this.name = name;
@@ -81,9 +94,21 @@ public class PerfisModelo implements Serializable {
         this.telefoneZap = telefoneZap;
         this.pesoMigrama = pesoMigrama;
         this.alturaCetimentro = alturaCetimentro;
+        this.uf = uf;
+        this.sexo = sexo;
+        this.sangue = sangue;
         this.pais_fk = pais_fk;
         this.moradia_fk = moradia_fk;
     }
+
+
+
+
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -195,7 +220,44 @@ public class PerfisModelo implements Serializable {
 
     public void setMoradia_fk(MoradiaModel moradia_fk) {
         this.moradia_fk = moradia_fk;
+    }
+
+    public EnumUf getUf() {
+        return uf;
+    }
+
+
+    public void setUf(EnumUf uf) {
+        this.uf = uf;
+    }
+
+
+    public void setPais_fk(AfiliacaoModelo pais_fk) {
+        this.pais_fk = pais_fk;
+    }
+
+
+    public EnumGenero getSexo() {
+        return sexo;
+    }
+
+
+    public void setSexo(EnumGenero sexo) {
+        this.sexo = sexo;
+    }
+
+
+    public EnumSague getSangue() {
+        return sangue;
+    }
+
+
+    public void setSangue(EnumSague sangue) {
+        this.sangue = sangue;
     } 
+
+
+    
 
 
     
