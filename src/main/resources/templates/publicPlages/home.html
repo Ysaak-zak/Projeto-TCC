@@ -42,7 +42,7 @@
     <p class="text-gray-500 text-center mt-2">Treinos e resultados</p>
 </a>
 
-    <a href="/cadastro-medico" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-red-500 hover:shadow-xl transition">
+    <a th:href="@{/cadastro/medico/{id}(id=2)}" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-red-500 hover:shadow-xl transition">
       <div class="flex justify-center mb-4 text-red-500">
        <img th:src="@{img/medico.png}" alt="" class="w-20">
       </div>
@@ -50,7 +50,7 @@
       <p class="text-gray-500 text-center mt-2">Monitoramento clínico</p>
     </a>
 
-    <a href="/cadastro-treinador" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-green-500 hover:shadow-xl transition">
+    <a th:href="@{/cadastro/medico/{id}(id=3)}" class="block bg-white p-8 rounded-xl shadow border-2 border-transparent hover:border-green-500 hover:shadow-xl transition">
       <div class="flex justify-center mb-4 text-green-600">
         <img th:src="@{img/treinador.png}" alt="" class="w-20">
       </div>

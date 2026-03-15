@@ -75,7 +75,7 @@ public class PerfisModelo implements Serializable {
     private MoradiaModel moradia_fk;
 
     @ManyToOne
-    @JoinColumn(name = "role_id") // Tente mudar de "role" para "role_id"
+    @JoinColumn(name = "role_id")
     private RolesModel role;
 
 

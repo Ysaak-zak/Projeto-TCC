@@ -11,6 +11,5 @@ import com.api.Projeto_3.model.AtletaModelo;
 
 @Repository
 public interface AtletaRespository extends  JpaRepository<AtletaModelo,Long>  {
- @Query(value = "SELECT * FROM ATLETAS a INNER JOIN perfis_modelo p ON a.perfil_id = p.id WHERE a.id = :atletaId", nativeQuery = true)
-AtletaModelo pegarAtletaComPerfil(@Param("atletaId") Long atletaId);
+
 }
