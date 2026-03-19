@@ -16,15 +16,14 @@
          <div class="w-full xl:ml-52 flex justify-baseline xl:mr-36">
             <h1 class="xl:text-3xl">Cadastro Atleta</h1>
         </div>
-        </div>
-
-       
+        </div> 
 
    <input type="hidden" name="idDaRole" th:value="${roleId}" />
     </header>
 
-<form th:action="@{/atleta/save/{id}(id=${id})}" th:method="post" th:object="${atletaDtos}">
+<form th:action="@{/atleta/save/{id}(id=${id})}" th:method="post" th:object="${atletaDtos}" >
     <nav class="sm:w-full flex items-center gap-2 justify-center flex-col lg:flex-row lg:gap-12 lg:w-full lg:px-16 bg-white py-4 lg:py-7 lg:rounded-2xl lg:w-5/6 ">
+        
         <section class="border-4 border-dashed flex flex-col items-center gap-3 w-5/6 py-3 duration-500 xl:w-full xl:px-24 xl:rounded-2xl ">
             <img th:src="@{/img/camera.svg}" class="w-16 lg:w-40">
             <p class="lg:text-3xl font-black text-gray-700 ">FOTO</p>
@@ -36,12 +35,12 @@
             <p class="lg:text-2xl font-black text-gray-700 ">MEDICO</p>
         </a>
         
-       <a th:href="@{/detalhes/{id}(id=${id})}" class="pointer-events-none border-4 border-sky-600 bg-sky-600 flex flex-col items-center gap-5 w-5/6 duration-500 xl:w-full py-2 xl:rounded-2xl">
+       <a th:href="@{/atleta/{id}(id=*{id})}" class="pointer-events-none border-4 border-sky-600 bg-sky-600 flex flex-col items-center gap-5 w-5/6 duration-500 xl:w-full py-2 xl:rounded-2xl">
     <img th:src="@{/img/atletaBranco.svg}" class="w-16">
-    <p class="lg:text-2xl font-black text-white" th:text="${roleNome}"></p>
+    <p class="lg:text-2xl font-black text-white">Atleta</p>
 </a>
         
-        <a th:href="@{/cadastro/treinador/{id}(id=2)}" class="border-4 border-sky-600 flex flex-col items-center gap-5 w-5/6 hover:bg-sky-300 duration-500 xl:w-full py-2 xl:rounded-2xl">
+        <a th:href="@{/cadastro/treinador/{id}(id=3)}" class="border-4 border-sky-600 flex flex-col items-center gap-5 w-5/6 hover:bg-sky-300 duration-500 xl:w-full py-2 xl:rounded-2xl">
             <img th:src="@{/img/treinadorAzul.svg}" class="w-16">
             <p class="lg:text-2xl font-black text-gray-700 ">TREINADOR</p>
         </a>
@@ -105,7 +104,7 @@
                             <p class="xl:text-2xl font-bold xl:ml-3">EMAIL</p>
                             <input  th:field="*{email}" type="email" placeholder="exemplo@email.com" class="mt-2 w-full bg-white xl:w-11/12 py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>  
-                    </div>
+                        </div>
 
                         <div class="w-full">
                         <p class="xl:text-2xl font-bold">SENHA</p>
@@ -153,7 +152,7 @@
                     </div>
                         <div class="w-full xl:w-1/3">
                         <p class="xl:text-2xl font-bold">NUMERO</p>
-                        <input th:field="*{moradia_fk.sn}" type="text" placeholder="Nome da rua" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                        <input th:field="*{moradia_fk.sn}" type="number" placeholder="Nome da rua" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                          <p th:if="${#fields.hasErrors('moradia_fk.sn')}" th:errors="*{moradia_fk.sn}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>   
                         
                     </div>
@@ -162,13 +161,13 @@
             <section class="flex flex-col gap-3 xl:flex-row xl:mt-5 ">
                 <div class="w-full">
                     <p class="xl:text-2xl font-bold">BAIRRO</p>
-                    <input  th:field="*{moradia_fk.bairro}" type="number" placeholder="Digitar o Bairro" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                    <input  th:field="*{moradia_fk.bairro}" type="text" placeholder="Digitar o Bairro" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                          <p th:if="${#fields.hasErrors('moradia_fk.bairro')}" th:errors="*{moradia_fk.bairro}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>   
                     
                 </div>
                 <div class="w-full">
                     <p class="xl:text-2xl font-bold">CIDADE</p>
-                    <input  th:field="*{moradia_fk.cidade}" type="number" placeholder="(00) 0000-0000" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                    <input  th:field="*{moradia_fk.cidade}" type="text" placeholder="(00) 0000-0000" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                          <p th:if="${#fields.hasErrors('moradia_fk.cidade')}" th:errors="*{moradia_fk.cidade}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>   
                     
                 </div>
@@ -192,7 +191,7 @@
                     <section class="flex flex-col gap-3 xl:flex-row xl:mt-5 ">
                         <div class="w-full">
                                 <p class="xl:text-2xl font-bold">ALTURA</p>
-                                <input th:field="*{alturaCetimentro}" type="number" placeholder="Digitar a altura" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                                <input th:field="*{alturaCetimentro}" type="text" placeholder="Digitar a altura" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                                 <p th:if="${#fields.hasErrors('alturaCetimentro')}" th:errors="*{alturaCetimentro}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>   
                         </div>
                         <div class="w-full">
@@ -248,7 +247,7 @@
                             </div>
                         <div class="w-full xl:mt-6 mt-3">
                                 <p class=" font-bold">NOME DA PAI</p>
-                                 <input  th:field="*{pais_fk.paiName}" type="text" placeholder="Digitar nome da mãe" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                                 <input  th:field="*{pais_fk.paiName}" type="text" placeholder="Digitar nome do pai" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                                  <p th:if="${#fields.hasErrors('pais_fk.paiName')}" th:errors="*{pais_fk.paiName}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>                              
                             </div>
                         <div class="w-full xl:mt-6 mt-3">
@@ -259,7 +258,7 @@
                         </div>
                         <div class="w-full xl:mt-6 mt-3">
                             <p class=" font-bold">E-MAIL</p>
-                            <input th:field="*{pais_fk.paiEmail}" type="email" placeholder="Digitar o Bairro" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
+                            <input th:field="*{pais_fk.paiEmail}" type="email" placeholder="Digitar o email da mãe" class="mt-2 bg-white w-full py-2 px-1 border-4 border-sky-500 xl:rounded-2xl xl:py-3 xl:px-3">
                                <p th:if="${#fields.hasErrors('pais_fk.paiEmail')}" th:errors="*{pais_fk.paiEmail}"  class="text-red-600 font-bold mt-1 ml-3 italic text-sm"></p>                              
                             
                         </div>

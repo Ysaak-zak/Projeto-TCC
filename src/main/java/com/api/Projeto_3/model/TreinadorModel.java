@@ -1,8 +1,10 @@
 package com.api.Projeto_3.model;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.api.Projeto_3.model.enums.*;
+import com.api.Projeto_3.model.enums.EnumGenero;
+import com.api.Projeto_3.model.enums.EnumSague;
+import com.api.Projeto_3.model.enums.EnumUf;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 

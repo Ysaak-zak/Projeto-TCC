@@ -13,7 +13,7 @@ public class RoleDtos {
     }
 
     public RoleDtos(RolesModel roles) {
-    if (roles != null) { // Adicione esta trava de segurança
+    if (roles != null) {
         this.id = roles.getId();
         this.authority = roles.getAuthority();
     }

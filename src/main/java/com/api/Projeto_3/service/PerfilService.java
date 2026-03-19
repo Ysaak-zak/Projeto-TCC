@@ -1,13 +1,11 @@
 package com.api.Projeto_3.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.Projeto_3.dtos.AfiliacaoDtos;
-import com.api.Projeto_3.dtos.PerfilsDtos;
 import com.api.Projeto_3.dtos.MoradiaDto;
+import com.api.Projeto_3.dtos.PerfilsDtos;
 import com.api.Projeto_3.dtos.RoleDtos;
 import com.api.Projeto_3.model.AfiliacaoModelo;
 import com.api.Projeto_3.model.AtletaModelo;
@@ -25,6 +23,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class PerfilService {
+        
     
     @Autowired
     AtletaRespository respository;
@@ -38,9 +37,9 @@ public class PerfilService {
     @Autowired
     RoleRepository roles;
 
-    //SAVALNDO ATLETA
+    //SAVALNDO PERFILS
     @Transactional
-    public PerfilsDtos InsertAtleta(PerfilsDtos dtos ){
+    public PerfilsDtos InsertAtleta(PerfilsDtos dtos){
         AtletaModelo atl = new AtletaModelo();           
         
         preencherDadosBasicos(atl,dtos);
@@ -49,11 +48,11 @@ public class PerfilService {
         salvarMoradia(dtos.getMoradia_fk(), atl);
         
         AtletaModelo salvo = respository.save(atl);
-        
+
+        respository.save(salvo);
         return new PerfilsDtos(salvo);
     }
 
-    //salvando MEDICO
     @Transactional
     public PerfilsDtos insertMeidco( PerfilsDtos dos){
         MedicoModelo med = new MedicoModelo();
@@ -67,9 +66,6 @@ public class PerfilService {
 
         return new PerfilsDtos(salveMeidco);
     }
-
-
-    //SALVANDO  TREINADOR
 
      @Transactional
     public PerfilsDtos insertTreinador( PerfilsDtos dos){
@@ -85,30 +81,24 @@ public class PerfilService {
         return new PerfilsDtos(salveTrei);
     }
 
-
-    //BUSCANDO ROLE DE PERFIL
-        public RoleDtos infoRoles(Long id){
+    
+    public RoleDtos infoRoles(Long id){
             var rol = roles.findById(id).orElseThrow(()-> new RuntimeException());
             return new RoleDtos(rol);
         }
 
 
     //buscado nome do role
-
     public String buscarNomeRoles(Long id){
         RoleDtos role = infoRoles(id);
 
         if(role != null && role.getAuthority() != null){
             return role.getAuthority();
         }
-        return "Atleta";
+        return role.getAuthority();
     }
 
-
-
-
-   //SALVANDO DOS FORMULARIO DO (ATLETA , MEDICO , TREINADOR) 
-     private void   preencherDadosBasicos(PerfisModelo perMod, PerfilsDtos dtos){
+    private void   preencherDadosBasicos(PerfisModelo perMod, PerfilsDtos dtos){
             perMod.setName(dtos.getName());
             perMod.setDataNascimento(dtos.getDataNascimento());
             perMod.setCpf(dtos.getCpf());
@@ -126,13 +116,13 @@ public class PerfilService {
 
      }
 
-     //SALVANDO PERIFLS EM CADA DE CADA UM 
+     
+     //PREENCHENDO CODIGOS
       private   void salvarPerfil(PerfilsDtos dos,PerfisModelo atl){
         RolesModel roleReal = roles.findById(dos.getRoles().getId()).orElseThrow(() -> new RuntimeException("Role não encontrada"));
        atl.setRole(roleReal);
     }
 
-    //SALVANDO AFILIAÇÃO
     private void salvarAfiliado(AfiliacaoDtos afi , PerfisModelo perMod){
          AfiliacaoModelo pais = new AfiliacaoModelo();
 
@@ -147,7 +137,8 @@ public class PerfilService {
 
     }
     
-     private void salvarMoradia(MoradiaDto morDtos , PerfisModelo perMod){
+    
+    private void salvarMoradia(MoradiaDto morDtos , PerfisModelo perMod){
             MoradiaModel mor = new MoradiaModel();
 
             mor.setCep(morDtos.getCep());

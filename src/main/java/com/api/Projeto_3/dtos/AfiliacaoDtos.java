@@ -5,42 +5,59 @@ import java.io.Serializable;
 import com.api.Projeto_3.model.AfiliacaoModelo;
 import com.api.Projeto_3.model.PerfisModelo;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 public class AfiliacaoDtos implements Serializable {
     
     private static final long serialVersionUID = 1L;
  
 
+
     private  Long id;
+    
+    @NotBlank(message = "O nome da mãe não poder ser vazio")
+    @Size(min = 5 , message = "O nome da mãe dever ser maior que 5 cacachteres")
     private  String maeNome;
+    
+    @Pattern(regexp = "^[0-9]+$", message = "O campo deve conter apenas números")
+    @NotBlank(message = "O telefone não pode ser vazio")
     private  String maeTelefone;
+
+    @Email(message = "Email da mãe , não poder  invalido")
+    @NotBlank(message = "Email da mãe não pode ser vazio")
     private  String maeEmail;
+
+    @NotBlank(message = "O nome do pai não poder ser vazio")
+    @Size(min = 5 , message = "O nome da pai dever ser maior que 5 cacachteres")
     private  String paiName;
+
+     @Pattern(regexp = "^[0-9]+$", message = "O campo deve conter apenas números")
+    @NotBlank(message = "O telefone não pode ser vazio")
     private  String paiTelefone;
+    
+    
+    @Email(message = "Email da pai , não poder  invalido")
+    @NotBlank(message = "Email do pai  não pode ser vazio")
     private  String paiEmail;
     private PerfisModelo perfis;
 
+      public AfiliacaoDtos(){
     
-
-     
-
-    public AfiliacaoDtos(Long id, String maeNome, String maeTelefone, String maeEmail, String paiName,
-            String paiTelefone, String paiEmail, PerfisModelo perfis) {
-        this.id = id;
-        this.maeNome = maeNome;
-        this.maeTelefone = maeTelefone;
-        this.maeEmail = maeEmail;
-        this.paiName = paiName;
-        this.paiTelefone = paiTelefone;
-        this.paiEmail = paiEmail;
-
-        
-
+    
     }
 
-    public AfiliacaoDtos(AfiliacaoModelo model) {
-   
+    public AfiliacaoDtos(AfiliacaoModelo model) {   
         this.id = model.getId();
         this.maeNome = model.getMaeNome();
         this.maeTelefone = model.getMaeTelefone();
@@ -48,80 +65,7 @@ public class AfiliacaoDtos implements Serializable {
         this.paiName = model.getPaiName(); 
         this.paiTelefone = model.getPaiTelefone();
         this.paiEmail = model.getPaiEmail();
-        
         this.perfis = model.getPerfis(); 
     }
-
-
-
-     public AfiliacaoDtos(){
-    }
-
-
-    
-
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getMaeNome() {
-        return maeNome;
-    }
-    public void setMaeNome(String maeNome) {
-        this.maeNome = maeNome;
-    }
-    public String getMaeTelefone() {
-        return maeTelefone;
-    }
-    public void setMaeTelefone(String maeTelefone) {
-        this.maeTelefone = maeTelefone;
-    }
-    public String getMaeEmail() {
-        return maeEmail;
-    }
-    public void setMaeEmail(String maeEmail) {
-        this.maeEmail = maeEmail;
-    }
-    public String getPaiName() {
-        return paiName;
-    }
-    public void setPaiName(String paiName) {
-        this.paiName = paiName;
-    }
-    public String getPaiTelefone() {
-        return paiTelefone;
-    }
-    public void setPaiTelefone(String paiTelefone) {
-        this.paiTelefone = paiTelefone;
-    }
-    public String getPaiEmail() {
-        return paiEmail;
-    }
-    public void setPaiEmail(String paiEmail) {
-        this.paiEmail = paiEmail;
-    }
-    public PerfisModelo getPerfis() {
-        return perfis;
-    }
-    public void setPerfis(PerfisModelo perfis) {
-        this.perfis = perfis;
-    }
-
-    @Override
-    public String toString() {
-        return "AfiliacaoDtos [id=" + id + ", maeNome=" + maeNome + ", maeTelefone=" + maeTelefone + ", maeEmail="
-                + maeEmail + ", paiName=" + paiName + ", paiTelefone=" + paiTelefone + ", paiEmail=" + paiEmail
-                + ", perfis=" + perfis + "]";
-    }
-
-
-    
-
-
-    
-    
 
 }
