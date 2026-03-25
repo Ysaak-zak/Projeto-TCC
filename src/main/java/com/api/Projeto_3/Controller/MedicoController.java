@@ -40,7 +40,7 @@ public class MedicoController {
     }
 
 
-    @PostMapping("/medico/save/{id}")
+    @PostMapping("cadastro/medico/save/{id}")
 public String postMedicoInsert(@PathVariable("id")  Long id ,@ModelAttribute("medicosDtos") @Valid PerfilsDtos medicosDtos , BindingResult result,  Model model) {
 
      if (result.hasErrors()) { 

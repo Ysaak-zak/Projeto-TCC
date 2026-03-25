@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Acessar Portal</title>
-      <link th:href="@{/css/styles.css}" rel="stylesheet">
-    <html xmlns:th="http://www.thymeleaf.org"></html>
-     <link rel="icon" th:href="@{/img/iconFun.png}">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link rel="icon" th:href="@{/img/iconFun.png}">
 </head>
 <body>
 
@@ -14,15 +13,20 @@
             <h1>Acessar - Portal</h1>
             <div class="underline"></div>
 
-            <form action="#">
+            <div th:if="${param.error}" style="color: red; margin-bottom: 10px; font-size: 0.9rem;">
+                CPF ou senha incorretos.
+            </div>
+
+           <form th:action="@{/login}" method="post">
+                
                 <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="" required>
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
                 </div>
 
                 <div class="input-group">
                     <label for="password">Palavra-Chave</label>
-                    <input type="password" id="password" placeholder="" required>
+                    <input type="password" id="password" name="password" placeholder="******" required>
                 </div>
 
                 <button type="submit" class="btn-entrar">Entrar</button>

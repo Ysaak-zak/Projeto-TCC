@@ -1,8 +1,13 @@
 package com.api.Projeto_3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.core.userdetails.User;
 import com.api.Projeto_3.dtos.AfiliacaoDtos;
 import com.api.Projeto_3.dtos.MoradiaDto;
 import com.api.Projeto_3.dtos.PerfilsDtos;
@@ -16,14 +21,17 @@ import com.api.Projeto_3.model.RolesModel;
 import com.api.Projeto_3.model.TreinadorModel;
 import com.api.Projeto_3.repository.AtletaRespository;
 import com.api.Projeto_3.repository.MedicoRespository;
+import com.api.Projeto_3.repository.PerfilRepository;
 import com.api.Projeto_3.repository.RoleRepository;
 import com.api.Projeto_3.repository.TreinadorRespository;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class PerfilService {
+public class PerfilService implements UserDetailsService {
         
+    @Autowired
+    PerfilRepository perfilJpa;
     
     @Autowired
     AtletaRespository respository;
@@ -36,6 +44,9 @@ public class PerfilService {
 
     @Autowired
     RoleRepository roles;
+
+    @Autowired
+    private PasswordEncoder hast;
 
     //SAVALNDO PERFILS
     @Transactional
@@ -88,7 +99,7 @@ public class PerfilService {
         }
 
 
-    //buscado nome do role
+    
     public String buscarNomeRoles(Long id){
         RoleDtos role = infoRoles(id);
 
@@ -104,7 +115,9 @@ public class PerfilService {
             perMod.setCpf(dtos.getCpf());
             perMod.setRg(dtos.getRg());
             perMod.setEmail(dtos.getEmail());
-            perMod.setSenha(dtos.getSenha());
+
+            perMod.setSenha(this.hast.encode(dtos.getSenha()));
+
             perMod.setTelefoneFixo(dtos.getTelefoneFixo());
             perMod.setTelefoneZap(dtos.getTelefoneZap());
             perMod.setPesoMigrama(dtos.getPesoMigrama());
@@ -116,8 +129,6 @@ public class PerfilService {
 
      }
 
-     
-     //PREENCHENDO CODIGOS
       private   void salvarPerfil(PerfilsDtos dos,PerfisModelo atl){
         RolesModel roleReal = roles.findById(dos.getRoles().getId()).orElseThrow(() -> new RuntimeException("Role não encontrada"));
        atl.setRole(roleReal);
@@ -151,6 +162,18 @@ public class PerfilService {
 
     }
 
+
+@Override
+public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+    PerfisModelo usuario = perfilJpa.findByCpf(cpf)
+            .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com CPF: " + cpf));
+
+    return User.builder()
+            .username(usuario.getCpf())
+            .password(usuario.getSenha())
+            .authorities(new SimpleGrantedAuthority(usuario.getRole().getAuthority()))
+            .build();
+}
 
 }
 

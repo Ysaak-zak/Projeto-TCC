@@ -2,6 +2,11 @@ package com.api.Projeto_3.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.api.Projeto_3.model.enums.EnumGenero;
 import com.api.Projeto_3.model.enums.EnumSague;
@@ -32,7 +37,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class PerfisModelo implements Serializable {
+public class PerfisModelo implements UserDetails {
     
     private static final long serialVersionUID = 1L;
 
@@ -47,9 +52,10 @@ public class PerfisModelo implements Serializable {
     private String name;
 
   
-   @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+   @Column(columnDefinition = "DATE")
     private LocalDate dataNascimento;
 
+    @Column(unique = true , nullable = false)
     private String cpf;
 
     private String rg;
@@ -92,5 +98,28 @@ public class PerfisModelo implements Serializable {
     public PerfisModelo() {
     }
 
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+	}
+
+
+	@Override
+	public @Nullable String getPassword() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+	}
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+	}
+
+
+	
 
 }

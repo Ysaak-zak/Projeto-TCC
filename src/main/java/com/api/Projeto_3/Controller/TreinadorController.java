@@ -39,7 +39,7 @@ public class TreinadorController {
         return "publicPlages/cadastroTreinador";
     }
 
-@PostMapping("/treinador/save/{id}")
+@PostMapping("cadastro/treinador/save/{id}")
 public String postTreinadorInsert(@PathVariable("id")   Long id , @ModelAttribute("treinadorDtos") @Valid PerfilsDtos treinadorDtos , BindingResult result,  Model model) {
     
     if(result.hasErrors()){
