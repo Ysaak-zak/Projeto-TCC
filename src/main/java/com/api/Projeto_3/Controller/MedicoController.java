@@ -19,19 +19,18 @@ import com.api.Projeto_3.service.PerfilService;
 
 import jakarta.validation.Valid;
 
-
 @Controller
 public class MedicoController {
 
-      @Autowired
+    @Autowired
     PerfilService service;
 
-       @GetMapping("/cadastro/medico/{id}")
-        public String getCadastroMedico(@PathVariable("id") Long id, PerfilsDtos medicosDtos, Model model) {
+    @GetMapping("/cadastro/medico/{id}")
+    public String getCadastroMedico(@PathVariable("id") Long id, PerfilsDtos medicosDtos, Model model) {
         model.addAttribute("listaUfs", EnumDtos.values());
         model.addAttribute("listSague", EnumSague.values());
         model.addAttribute("listEnumGenero", EnumGenero.values());
-        
+
         var role = service.infoRoles(id);
 
         model.addAttribute("roleId", role);
@@ -39,25 +38,25 @@ public class MedicoController {
         return "publicPlages/cadastroMedico";
     }
 
-
     @PostMapping("cadastro/medico/save/{id}")
-public String postMedicoInsert(@PathVariable("id")  Long id ,@ModelAttribute("medicosDtos") @Valid PerfilsDtos medicosDtos , BindingResult result,  Model model) {
+    public String postMedicoInsert(@PathVariable("id") Long id,
+            @ModelAttribute("medicosDtos") @Valid PerfilsDtos medicosDtos, BindingResult result, Model model) {
 
-     if (result.hasErrors()) { 
-        model.addAttribute("listSague", EnumSague.values());
-        model.addAttribute("listEnumGenero", EnumGenero.values());
-        model.addAttribute("listaUfs", EnumUf.values());
-        model.addAttribute("id", id); 
+        if (result.hasErrors()) {
+            model.addAttribute("listSague", EnumSague.values());
+            model.addAttribute("listEnumGenero", EnumGenero.values());
+            model.addAttribute("listaUfs", EnumUf.values());
+            model.addAttribute("id", id);
 
-        model.addAttribute("roleId", service.buscarNomeRoles(id));   
-        return "publicPlages/cadastroMedico"; 
+            model.addAttribute("roleId", service.buscarNomeRoles(id));
+            return "publicPlages/cadastroMedico";
+        }
+        if (medicosDtos.getRoles() == null) {
+            medicosDtos.setRoles(new RoleDtos());
+        }
+        medicosDtos.getRoles().setId(id);
+        service.insertMeidco(medicosDtos);
+
+        return "redirect:/home";
     }
-    if(medicosDtos.getRoles() == null){
-        medicosDtos.setRoles(new RoleDtos());
-    }
-      medicosDtos.getRoles().setId(id);
-      service.insertMeidco(medicosDtos);
-
-    return "redirect:/home";
-}
 }

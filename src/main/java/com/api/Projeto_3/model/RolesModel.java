@@ -20,24 +20,18 @@ public class RolesModel {
 
     @OneToMany
     private List<PerfisModelo> perfils = new ArrayList<>();
-    
+
     public RolesModel(Long id, String authority) {
         this.id = id;
         this.authority = authority;
     }
 
-    
-
     public RolesModel() {
     }
-
-
 
     public Long getId() {
         return id;
     }
-
-
 
     public void setId(Long id) {
         this.id = id;
@@ -51,16 +45,9 @@ public class RolesModel {
         this.authority = authority;
     }
 
-
-
     @Override
     public String toString() {
         return "RolesModel [id=" + id + ", authority=" + authority + ", perfils=" + perfils + "]";
     }
 
-    
-    
-
-   
-    
 }

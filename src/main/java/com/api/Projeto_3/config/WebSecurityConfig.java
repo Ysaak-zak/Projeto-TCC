@@ -9,67 +9,55 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig  {
+public class WebSecurityConfig {
 
     @Bean
-    SecurityFilterChain secuguraFilter( HttpSecurity http) throws Exception{
+    SecurityFilterChain secuguraFilter(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(
-            (req) -> req
-            .requestMatchers("/home","/cadastro/**").permitAll()
-            .requestMatchers("/css/**" , "/img/**").permitAll()
-            .requestMatchers("/login").permitAll()
-            .requestMatchers("/atleta").hasRole("ATLETA")
-        )
-        .formLogin(form -> form
-        .loginPage("/login")               
-        .loginProcessingUrl("/login")       
-        .usernameParameter("cpf")           
-        .passwordParameter("password")      
-        
-        .successHandler((req , res , aut)->{
-                String autRoles = aut.getAuthorities().iterator().next().getAuthority();
+                (req) -> req
+                        .requestMatchers("/home", "/cadastro/**").permitAll()
+                        .requestMatchers("/css/**", "/img/**").permitAll()
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/atleta").hasRole("ATLETA"))
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("cpf")
+                        .passwordParameter("password")
 
-                switch (autRoles) {
-                    case "ROLE_ATLETA":
-                            res.sendRedirect("/atleta");
-                        break;
+                        .successHandler((req, res, aut) -> {
+                            String autRoles = aut.getAuthorities().iterator().next().getAuthority();
 
-                    case "ROLE_MEDICO":
-                            res.sendRedirect("/medico");
-                        break;
+                            switch (autRoles) {
+                                case "ROLE_ATLETA":
+                                    res.sendRedirect("/atleta");
+                                    break;
 
-                     case "ROLE_TREINADOR":
-                            res.sendRedirect("/treinador");
-                        break;
-                
-                    default:
-                        break;
-                }
+                                case "ROLE_MEDICO":
+                                    res.sendRedirect("/medico");
+                                    break;
 
-        })
-    )
-        .httpBasic(Customizer.withDefaults());
-        
+                                case "ROLE_TREINADOR":
+                                    res.sendRedirect("/treinador");
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                        }))
+                .httpBasic(Customizer.withDefaults());
+
         return http.build();
 
-
-        
-
     }
-     
-
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-   
-
 
 }

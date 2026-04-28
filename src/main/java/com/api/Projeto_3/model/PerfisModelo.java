@@ -30,7 +30,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,32 +37,30 @@ import lombok.ToString;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class PerfisModelo implements UserDetails {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long id; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-   @Column(name = "foto_url")
+    @Column(name = "foto_url")
     private String fotoImg;
 
-    @Column(name = "per_nome" , length =50)
+    @Column(name = "per_nome", length = 50)
     private String name;
 
-  
-   @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATE")
     private LocalDate dataNascimento;
 
-    @Column(unique = true , nullable = false)
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     private String rg;
-    
+
     private String email;
 
     private String senha;
-
 
     private String telefoneFixo;
 
@@ -71,19 +68,19 @@ public class PerfisModelo implements UserDetails {
 
     private String pesoMigrama;
 
-    private String  alturaCetimentro;
+    private String alturaCetimentro;
 
     @Enumerated(EnumType.STRING)
     private EnumUf uf;
 
     @Enumerated(EnumType.STRING)
     private EnumGenero sexo;
-    
-     @Enumerated(EnumType.STRING)
+
+    @Enumerated(EnumType.STRING)
     private EnumSague sangue;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fal_fk" , unique = true )
+    @JoinColumn(name = "fal_fk", unique = true)
     private AfiliacaoModelo pais_fk;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -94,32 +91,25 @@ public class PerfisModelo implements UserDetails {
     @JoinColumn(name = "role_id")
     private RolesModel role;
 
-
     public PerfisModelo() {
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
-	}
+    @Override
+    public @Nullable String getPassword() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
 
-
-	@Override
-	public @Nullable String getPassword() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
-	}
-
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
-	}
-
-
-	
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
 
 }

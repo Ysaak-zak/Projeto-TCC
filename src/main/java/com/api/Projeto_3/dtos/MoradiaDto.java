@@ -9,18 +9,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
 
 public class MoradiaDto {
-    private long id; 
+    private long id;
 
     @NotBlank(message = "cep não pode ser zero")
     private String cep;
-    
+
     @NotBlank(message = "avenida não pode ser zero")
     private String avenida;
 
@@ -34,12 +33,11 @@ public class MoradiaDto {
     private String cidade;
     private PerfisModelo perfil;
 
+    public MoradiaDto() {
 
-     public MoradiaDto() {
-        
     }
-        
-public MoradiaDto(MoradiaModel entiy) {
+
+    public MoradiaDto(MoradiaModel entiy) {
         this.id = entiy.getId();
         this.cep = entiy.getCep();
         this.avenida = entiy.getAvenida();
@@ -47,6 +45,5 @@ public MoradiaDto(MoradiaModel entiy) {
         this.bairro = entiy.getBairro();
         this.cidade = entiy.getCidade();
     }
-    
 
 }

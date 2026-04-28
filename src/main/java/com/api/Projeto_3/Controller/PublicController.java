@@ -6,30 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.api.Projeto_3.service.PerfilService;
 
-
-
-
 @Controller
 public class PublicController {
-   
+
     @Autowired
     PerfilService service;
 
-
     @GetMapping("/home")
     public String getHome() {
-         return "publicPlages/home";
+        return "publicPlages/home";
     }
-
 
     @GetMapping("/login")
     public String getMethodName() {
         return "publicPlages/Login";
     }
 
-
-
 }
-
-
-

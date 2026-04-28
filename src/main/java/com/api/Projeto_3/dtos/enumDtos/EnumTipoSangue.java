@@ -1,7 +1,7 @@
 package com.api.Projeto_3.dtos.enumDtos;
 
 public enum EnumTipoSangue {
-     A_POS("A+", "A Positivo"),
+    A_POS("A+", "A Positivo"),
     A_NEG("A-", "A Negativo"),
     B_POS("B+", "B Positivo"),
     B_NEG("B-", "B Negativo"),
@@ -24,5 +24,5 @@ public enum EnumTipoSangue {
 
     public String getDescricao() {
         return descricao;
-    }   
+    }
 }

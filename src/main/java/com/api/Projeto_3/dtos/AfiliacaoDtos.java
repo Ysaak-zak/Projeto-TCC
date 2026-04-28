@@ -19,53 +19,49 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AfiliacaoDtos implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
- 
 
+    private Long id;
 
-    private  Long id;
-    
     @NotBlank(message = "O nome da mãe não poder ser vazio")
-    @Size(min = 5 , message = "O nome da mãe dever ser maior que 5 cacachteres")
-    private  String maeNome;
-    
+    @Size(min = 5, message = "O nome da mãe dever ser maior que 5 cacachteres")
+    private String maeNome;
+
     @Pattern(regexp = "^[0-9]+$", message = "O campo deve conter apenas números")
     @NotBlank(message = "O telefone não pode ser vazio")
-    private  String maeTelefone;
+    private String maeTelefone;
 
     @Email(message = "Email da mãe , não poder  invalido")
     @NotBlank(message = "Email da mãe não pode ser vazio")
-    private  String maeEmail;
+    private String maeEmail;
 
     @NotBlank(message = "O nome do pai não poder ser vazio")
-    @Size(min = 5 , message = "O nome da pai dever ser maior que 5 cacachteres")
-    private  String paiName;
+    @Size(min = 5, message = "O nome da pai dever ser maior que 5 cacachteres")
+    private String paiName;
 
-     @Pattern(regexp = "^[0-9]+$", message = "O campo deve conter apenas números")
+    @Pattern(regexp = "^[0-9]+$", message = "O campo deve conter apenas números")
     @NotBlank(message = "O telefone não pode ser vazio")
-    private  String paiTelefone;
-    
-    
+    private String paiTelefone;
+
     @Email(message = "Email da pai , não poder  invalido")
     @NotBlank(message = "Email do pai  não pode ser vazio")
-    private  String paiEmail;
+    private String paiEmail;
     private PerfisModelo perfis;
 
-      public AfiliacaoDtos(){
-    
-    
+    public AfiliacaoDtos() {
+
     }
 
-    public AfiliacaoDtos(AfiliacaoModelo model) {   
+    public AfiliacaoDtos(AfiliacaoModelo model) {
         this.id = model.getId();
         this.maeNome = model.getMaeNome();
         this.maeTelefone = model.getMaeTelefone();
         this.maeEmail = model.getMaeEmail();
-        this.paiName = model.getPaiName(); 
+        this.paiName = model.getPaiName();
         this.paiTelefone = model.getPaiTelefone();
         this.paiEmail = model.getPaiEmail();
-        this.perfis = model.getPerfis(); 
+        this.perfis = model.getPerfis();
     }
 
 }

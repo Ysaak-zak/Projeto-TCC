@@ -19,55 +19,49 @@ import com.api.Projeto_3.service.PerfilService;
 
 import jakarta.validation.Valid;
 
-
 @Controller
 public class AtletaController {
 
-     @Autowired
+    @Autowired
     PerfilService service;
 
+    @GetMapping("/cadastro/atleta/{id}")
+    public String getCadastroAtleta(@PathVariable("id") Long id, PerfilsDtos atletaDtos, Model model) {
+        model.addAttribute("listaUfs", EnumDtos.values());
+        model.addAttribute("listSague", EnumSague.values());
+        model.addAttribute("listEnumGenero", EnumGenero.values());
 
-        @GetMapping("/cadastro/atleta/{id}")
-        public String getCadastroAtleta(@PathVariable("id") Long id, PerfilsDtos atletaDtos, Model model) {
-            model.addAttribute("listaUfs", EnumDtos.values());
+        var role = service.infoRoles(id);
+
+        model.addAttribute("roleId", role);
+        model.addAttribute("atletaDtos", atletaDtos);
+        return "publicPlages/cadastroAtleta";
+    }
+
+    @PostMapping("/cadastro/atleta/save/{id}")
+    public String postAtletaInsert(@PathVariable("id") Long id,
+            @ModelAttribute("atletaDtos") @Valid PerfilsDtos atletaDtos,
+            BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
             model.addAttribute("listSague", EnumSague.values());
             model.addAttribute("listEnumGenero", EnumGenero.values());
-            
-            var role = service.infoRoles(id);
-            
-            model.addAttribute("roleId", role);
-            model.addAttribute("atletaDtos", atletaDtos);
+            model.addAttribute("listaUfs", EnumUf.values());
+            model.addAttribute("id", id);
+            model.addAttribute("roleNome", service.buscarNomeRoles(id));
             return "publicPlages/cadastroAtleta";
         }
-        
-
-        @PostMapping("/cadastro/atleta/save/{id}")
-        public String postAtletaInsert( @PathVariable("id") Long id, @ModelAttribute("atletaDtos") @Valid PerfilsDtos atletaDtos,
-        BindingResult result,  Model model
-        ) {
-
-            if (result.hasErrors()) { 
-                model.addAttribute("listSague", EnumSague.values());
-                model.addAttribute("listEnumGenero", EnumGenero.values());
-                model.addAttribute("listaUfs", EnumUf.values());
-                model.addAttribute("id", id); 
-                model.addAttribute("roleNome", service.buscarNomeRoles(id));   
-                return "publicPlages/cadastroAtleta"; 
-            }
         if (atletaDtos.getRoles() == null) {
-                atletaDtos.setRoles(new RoleDtos()); 
-            }
-            atletaDtos.getRoles().setId(id);
-            service.InsertAtleta(atletaDtos);
-            return "redirect:/home"; 
-            }
-
-
-
-        @GetMapping("/atleta")
-        public String getBendoAtleta() {
-            return "atletaPages/atleBenvido.html";
+            atletaDtos.setRoles(new RoleDtos());
         }
-        
-  }
+        atletaDtos.getRoles().setId(id);
+        service.InsertAtleta(atletaDtos);
+        return "redirect:/home";
+    }
 
+    @GetMapping("/atleta")
+    public String getBendoAtleta() {
+        return "atletaPages/atleBenvido.html";
+    }
+
+}
