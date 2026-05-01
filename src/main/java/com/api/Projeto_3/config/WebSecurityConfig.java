@@ -20,7 +20,7 @@ public class WebSecurityConfig  {
         http.authorizeHttpRequests(
             (req) -> req
             .requestMatchers("/home","/cadastro/**").permitAll()
-            .requestMatchers("/css/**" , "/img/**").permitAll()
+            .requestMatchers("/css/**" , "/img/**" , "/js/**").permitAll()
             .requestMatchers("/login").permitAll()
             .requestMatchers("/atleta").hasRole("ATLETA")
         )
@@ -45,8 +45,7 @@ public class WebSecurityConfig  {
                      case "ROLE_TREINADOR":
                             res.sendRedirect("/treinador");
                         break;
-                
-                    default:
+                    default:           
                         break;
                 }
 
@@ -54,17 +53,10 @@ public class WebSecurityConfig  {
     )
         .httpBasic(Customizer.withDefaults());
         
-        return http.build();
-
-
-        
+        return http.build();   
 
     }
      
-
-
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

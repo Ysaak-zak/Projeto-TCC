@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "tailwind:watch": "./tailwind -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch",
-  "spring:run": "./mvnw spring-boot:run",
-  "dev": "concurrently \"npm run tailwind:watch\" \"npm run spring:run\""
-},
+    "tailwind:watch": "./tailwind -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch",
+    "spring:run": "./mvnw spring-boot:run",
+    "dev": "concurrently \"npm run tailwind:watch\" \"npm run spring:run\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ysaak-zak/Projeto-TCC.git"
@@ -23,5 +23,8 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "tailwindcss": "^4.2.1"
+  },
+  "dependencies": {
+    "jscharting": "^3.4.0"
   }
 }

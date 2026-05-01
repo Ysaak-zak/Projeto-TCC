@@ -1,6 +1,10 @@
 package com.api.Projeto_3.Controller;
-
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +20,7 @@ import com.api.Projeto_3.dtos.enumDtos.EnumGenero;
 import com.api.Projeto_3.model.enums.EnumSague;
 import com.api.Projeto_3.model.enums.EnumUf;
 import com.api.Projeto_3.service.PerfilService;
+import com.api.Projeto_3.service.TreinadorService;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +29,9 @@ public class TreinadorController {
 
     @Autowired
     PerfilService service;
+
+    @Autowired
+    TreinadorService serviceTre;
 
 
         @GetMapping("/cadastro/treinador/{id}")
@@ -48,15 +56,28 @@ public String postTreinadorInsert(@PathVariable("id")   Long id , @ModelAttribut
         model.addAttribute("listaUfs", EnumUf.values());
         model.addAttribute("id", id); 
         model.addAttribute("roleNome", service.buscarNomeRoles(id));   
-        return "publicPlages/cadastroTreinador.html";
+        return "redirect:/home"; 
     }  
     
      if(treinadorDtos.getRoles() == null){
         treinadorDtos.setRoles(new RoleDtos());
     }
 
+    treinadorDtos.getRoles().setId(id);
+
      service.insertTreinador(treinadorDtos);
     return "redirect:/home";
 }
+
+ @GetMapping("/treinador")
+public String getTreinador(@AuthenticationPrincipal UserDetails userLogado, Model model) {
     
+   
+    PerfilsDtos treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+
+    model.addAttribute("treinador", treinador);
+
+    return "treinadorPages/perfilTreinador";
+}
+
 }
