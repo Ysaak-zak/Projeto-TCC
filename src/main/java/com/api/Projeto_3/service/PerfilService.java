@@ -11,11 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.api.Projeto_3.dtos.AfiliacaoDtos;
-import com.api.Projeto_3.dtos.MoradiaDto;
-import com.api.Projeto_3.dtos.PerfilsDtos;
-import com.api.Projeto_3.dtos.RoleDtos;
-import com.api.Projeto_3.mapper.MapperObjs;
+import com.api.Projeto_3.dtos.model.AfiliacaoDtos;
+import com.api.Projeto_3.dtos.model.MoradiaDto;
+import com.api.Projeto_3.dtos.model.PerfilsDtos;
+import com.api.Projeto_3.dtos.model.RoleDtos;
 import com.api.Projeto_3.model.AfiliacaoModelo;
 import com.api.Projeto_3.model.AtletaModelo;
 import com.api.Projeto_3.model.MedicoModelo;

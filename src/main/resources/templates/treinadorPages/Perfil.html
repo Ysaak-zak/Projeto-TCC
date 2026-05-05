@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" th:href="@{/icon/iconFun.png}">
+</head>
+
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" th:href="@{/icon/iconFun.png}">
+</head>
+
+<body class="flex flex-col xl:flex-row bg-black font-serif w-full min-h-screen">
+   
+    <header class="w-full h-14 bg-amber-500 xl:h-screen xl:w-1/5 sticky top-0 z-50">
+        <ul class="flex justify-around items-center xl:flex-col mt-4 xl:mt-0 px-3.5 xl:px-0 gap-3.5 xl:gap-0">
+
+            <li class="w-full flex xl:h-28 xl:text-2xl xl:bg-black">
+                <a href="#" class="flex items-center xl:px-3.5 gap-5">
+                    <img src="img/user.svg" class="w-12 hidden xl:flex">
+                    <p class="text-white duration-500 font-extrabold" th:text="${nomeTreinador.name}"></p>
+                </a>
+            </li>
+
+            <li class="w-full flex xl:justify-start items-center xl:hover:bg-black/30 xl:h-11 xl:text-2xl xl:px-4">
+                <a th:href="@{/treinador}" class="flex items-center gap-2">
+                    <img th:src="@{/iconsTrei/dash.svg}" class="hidden xl:flex w-6">
+                    <p class="xl:hover:text-black hover:text-amber-50 duration-500 font-extrabold">DASHBOARD</p>
+                </a>
+            </li>
+
+            <li class="w-full flex xl:justify-start items-center xl:hover:bg-black/30 xl:h-11 xl:text-2xl xl:px-4">
+                <a th:href="@{/treinador/planilha}" class="flex items-center gap-2">
+                    <img th:src="@{/iconsTrei/trofeu.svg}" class="hidden xl:flex w-6">
+                    <p class="xl:hover:text-black hover:text-amber-50 duration-500 font-extrabold">PLANILHA</p>
+                </a>
+            </li>
+
+            <li class="w-full flex xl:justify-start items-center bg-amber-600 xl:h-11 xl:text-2xl xl:px-4">
+                <a th:href="@{/treinador/perfil}" class="flex items-center gap-2">
+                    <img th:src="@{/iconsTrei/user_id.svg}" class="hidden xl:flex w-6">
+                    <p class="xl:hover:text-black hover:text-amber-50 duration-500 font-extrabold">PERFIL</p>
+                </a>
+            </li>
+
+            <li class="w-full flex xl:justify-start items-center xl:hover:bg-black/30 xl:h-11 xl:text-2xl xl:px-4">
+                <a href="#" class="flex items-center gap-2">
+                    <img th:src="@{/iconsTrei/calen.svg}" class="hidden xl:flex w-6">
+                    <p class="xl:hover:text-black hover:text-amber-50 duration-500 font-extrabold">TREINOS</p>
+                </a>
+            </li>
+
+            <li class="w-full flex xl:justify-start items-center xl:bg-red-600 xl:h-11 xl:text-2xl xl:px-4 xl:mt-auto">
+                <a th:href="@{/home}" class="flex items-center gap-2">
+                    <img th:src="@{/iconsTrei/sair.svg}" class="hidden xl:flex w-6">
+                    <p class="xl:hover:text-black hover:text-red-700 duration-500 font-extrabold">SAIR</p>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main class="w-full flex flex-col gap-14">
+        <div class="flex bg-amber-50 py-4 text-2xl font-black px-2 justify-center xl:justify-start">
+            <h2 class="text-3xl font-extrabold">03 - PERFIL</h2>
+        </div>
+
+        <aside class="flex flex-col xl:flex-row bg-white/40">
+            <section class="w-full xl:flex-row px-10 py-3 flex flex-col justify-between gap-5 xl:gap-3">
+                <section class="w-full bg-amber-50 rounded-2xl px-3.5 py-2.5">
+                    <section class="w-full flex gap-3 items-center">
+                        <div class="bg-amber-400 w-12 h-12 rounded-full flex items-center justify-center">
+                            <img src="img/dash.svg" class="w-6 h-6" alt="Dashboard">
+                        </div>
+                        <div class="w-full">
+                            <h2 class="text-2xl font-extrabold" th:text="${treinador.name}">NOME</h2>
+                            <h3 class="text-green-700">TREINADOR</h3>
+                        </div>
+                    </section>
+
+                    <section class="flex flex-col xl:flex-row w-full xl:gap-12">
+                        <!-- DADOS PESSOAIS -->
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <div class="px-4 py-3">
+                                <img src="img/userVerd.svg" class="w-10">
+                                <span>DADOS PESSOAIS</span>
+                            </div>
+                            <div class="h-2 w-full bg-black"></div>
+                            <section class="flex justify-between px-4">
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">NASCIMENTO</label>
+                                        <p th:text="${treinador.dataNascimento}">00/00/0000</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">CPF</label>
+                                        <p th:text="${treinador.cpf}">000.000.000-00</p>
+                                    </div>
+                                </section>
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">SEXO</label>
+                                        <p th:text="${treinador.genero}">M/F</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">RG</label>
+                                        <p th:text="${treinador.rg}">000000</p>
+                                    </div>
+                                </section>
+                            </section>
+                        </section>
+
+                        <!-- SAUDE -->
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <div class="px-4 py-3">
+                                <img src="img/medalh.svg" class="w-10">
+                                <span>SAÚDE</span>
+                            </div>
+                            <div class="h-2 w-full bg-black"></div>
+                            <section class="flex justify-between px-4">
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">ALTURA</label>
+                                        <p th:text="${treinador.alturaCetimentro}">0.00</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">PESO</label>
+                                        <p><span th:text="${treinador.pesoMigrama}">00</span>kg</p>
+                                    </div>
+                                </section>
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">SANGUE</label>
+                                        <p th:text="${treinador.sangue}">A+</p>
+                                    </div>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </aside>
+
+        <!-- CONTATOS E LOCALIZAÇÃO -->
+        <aside class="flex flex-col xl:flex-row bg-white/40">
+            <section class="w-full xl:flex-row px-10 py-3 flex flex-col justify-between gap-5 xl:gap-3">
+                <section class="w-full bg-amber-50 rounded-2xl px-3.5 py-2.5">
+                    <section class="flex flex-col xl:flex-row w-full xl:gap-12">
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <div class="px-4 py-3 flex items-center gap-3">
+                                <img src="img/ceular.svg" class="w-10">
+                                <span class="text-2xl">CONTATOS</span>
+                            </div>
+                            <div class="h-2 w-full bg-black"></div>
+                            <section class="flex justify-between px-4">
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">E-mail Principal</label>
+                                        <p th:text="${treinador.email}">email@email.com</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">Telemóvel</label>
+                                        <p th:text="${treinador.telefoneFixo}">(00) 0000-0000</p>
+                                    </div>
+                                </section>
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">Telefone Zap</label>
+                                        <p th:text="${treinador.telefoneZap}">(00) 00000-0000</p>
+                                    </div>
+                                </section>
+                            </section>
+                        </section>
+
+                        <!-- LOCALIZAÇÃO - Acesso direto via Interface -->
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <div class="px-4 py-3 flex items-center gap-3">
+                                <img src="img/local.svg" class="w-10">
+                                <span class="text-2xl font-extrabold">LOCALIZAÇÃO</span>
+                            </div>
+                            <div class="h-2 w-full bg-black"></div>
+                            <section class="flex justify-between px-4">
+                                <section class="px-4 flex flex-col gap-2.5">
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">BAIRRO</label>
+                                        <p th:text="${treinador.bairro}">Bairro</p>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="font-mono text-black/70 font-extrabold">CIDADE</label>
+                                        <p th:text="${treinador.cidade}">Cidade</p>
+                                    </div>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </aside>
+
+        <!-- FILIAÇÃO - Acesso direto via Interface -->
+        <aside class="flex flex-col xl:flex-row bg-white/40">
+            <section class="w-full xl:flex-row px-10 py-3 flex flex-col justify-between gap-5 xl:gap-3">
+                <section class="w-full bg-amber-50 rounded-2xl px-3.5 py-2.5">
+                    <h2 class="text-2xl font-extrabold">FILIAÇÃO / ÁRVORE FAMILIAR</h2>
+                    <section class="flex flex-col xl:flex-row w-full xl:gap-12">
+                        <!-- MÃE -->
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <section class="px-4 py-6">
+                                <label class="font-mono text-black/70 font-extrabold">MÃE</label>
+                                <p th:text="${treinador.maeNome}">Nome da Mãe</p>
+                                <label class="font-mono text-black/70 font-extrabold mt-2">EMAIL</label>
+                                <p th:text="${treinador.maeEmail}">email@mae.com</p>
+                                <label class="font-mono text-black/70 font-extrabold mt-2">TELEFONE</label>
+                                <p th:text="${treinador.maeTelefone}">(00) 00000-0000</p>
+                            </section>
+                        </section>
+                        <!-- PAI -->
+                        <section class="w-full xl:w-1/2 flex flex-col gap-3 border-4 border-black mt-10 xl:rounded-2xl">
+                            <section class="px-4 py-6">
+                                <label class="font-mono text-black/70 font-extrabold">PAI</label>
+                                <p th:text="${treinador.paiName}">Nome do Pai</p>
+                                <label class="font-mono text-black/70 font-extrabold mt-2">EMAIL</label>
+                                <p th:text="${treinador.paiEmail}">email@pai.com</p>
+                                <label class="font-mono text-black/70 font-extrabold mt-2">TELEFONE</label>
+                                <p th:text="${treinador.paiTelefone}">(00) 00000-0000</p>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </aside>
+    </main>
+</body>
+
+</html>

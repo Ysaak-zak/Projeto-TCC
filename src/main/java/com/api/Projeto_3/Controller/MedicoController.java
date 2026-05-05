@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.api.Projeto_3.dtos.PerfilsDtos;
-import com.api.Projeto_3.dtos.RoleDtos;
 import com.api.Projeto_3.dtos.enumDtos.EnumDtos;
 import com.api.Projeto_3.dtos.enumDtos.EnumGenero;
+import com.api.Projeto_3.dtos.model.PerfilsDtos;
+import com.api.Projeto_3.dtos.model.RoleDtos;
 import com.api.Projeto_3.model.enums.EnumSague;
 import com.api.Projeto_3.model.enums.EnumUf;
 import com.api.Projeto_3.service.PerfilService;

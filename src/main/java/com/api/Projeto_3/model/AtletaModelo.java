@@ -1,16 +1,26 @@
 package com.api.Projeto_3.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 import com.api.Projeto_3.model.enums.*;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ATLETAS")
 public class AtletaModelo extends PerfisModelo {
+
+     @OneToOne(mappedBy = "atleta_fk" , cascade = CascadeType.ALL)
+    private  TreinamentoModel atleta;
+    @ManyToOne
+    @JoinColumn(name = "atletaTrenador_fk")
+    private TreinadorModel treinador_fk; 
 
 
     public AtletaModelo(){
@@ -27,6 +37,6 @@ public class AtletaModelo extends PerfisModelo {
 }
 
 
-
+   
 
 }

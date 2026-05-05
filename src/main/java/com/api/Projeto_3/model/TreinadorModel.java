@@ -1,11 +1,16 @@
 package com.api.Projeto_3.model;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.api.Projeto_3.model.enums.EnumGenero;
 import com.api.Projeto_3.model.enums.EnumSague;
 import com.api.Projeto_3.model.enums.EnumUf;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +28,12 @@ public TreinadorModel(Long id, String fotoImg, String name, LocalDate dataNascim
     super(id, fotoImg, name, dataNascimento, cpf, rg, email, senha, 
           telefoneFixo, telefoneZap, pesoMigrama, alturaCetimentro, uf, sexo, sangue, pais, moradia, role);
 }
-    
+
+    @ManyToOne
+    @JoinColumn(name = "treimanento_fk")
+    private TreinamentoModel treimanento_fk;
+
+    @OneToMany(mappedBy = "treinador_fk")
+    private List<AtletaModelo> atletas = new ArrayList<>();
     
 }

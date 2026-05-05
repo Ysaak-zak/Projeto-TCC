@@ -26,6 +26,9 @@ src/main/resources/static/css/output.css
 .springBeans
 .sts4-cache
 
+##NODE
+touch .gitignore
+
 ### Sistema Operacional (Arch Linux) ###
 .DS_Store
 Thumbs.db

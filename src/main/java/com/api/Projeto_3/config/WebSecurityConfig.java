@@ -20,9 +20,10 @@ public class WebSecurityConfig  {
         http.authorizeHttpRequests(
             (req) -> req
             .requestMatchers("/home","/cadastro/**").permitAll()
-            .requestMatchers("/css/**" , "/img/**" , "/js/**").permitAll()
+            .requestMatchers("/css/**" , "/img/**" , "/js/**" , "/iconsTrei/**").permitAll()
             .requestMatchers("/login").permitAll()
             .requestMatchers("/atleta").hasRole("ATLETA")
+            .requestMatchers("/treinador/**").hasRole("TREINADOR")
         )
         .formLogin(form -> form
         .loginPage("/login")               

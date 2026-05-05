@@ -2,7 +2,7 @@ package com.api.Projeto_3.Controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.stereotype.Controller;
@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.api.Projeto_3.dtos.PerfilsDtos;
-import com.api.Projeto_3.dtos.RoleDtos;
 import com.api.Projeto_3.dtos.enumDtos.EnumDtos;
 import com.api.Projeto_3.dtos.enumDtos.EnumGenero;
+import com.api.Projeto_3.dtos.interfaceCustomer.CustomerNome;
+import com.api.Projeto_3.dtos.interfaceCustomer.TreinadorCustomer;
+import com.api.Projeto_3.dtos.model.PerfilsDtos;
+import com.api.Projeto_3.dtos.model.RoleDtos;
 import com.api.Projeto_3.model.enums.EnumSague;
 import com.api.Projeto_3.model.enums.EnumUf;
 import com.api.Projeto_3.service.PerfilService;
@@ -73,11 +75,36 @@ public String postTreinadorInsert(@PathVariable("id")   Long id , @ModelAttribut
 public String getTreinador(@AuthenticationPrincipal UserDetails userLogado, Model model) {
     
    
-    PerfilsDtos treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+    //PerfilsDtos treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+    TreinadorCustomer treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
 
     model.addAttribute("treinador", treinador);
 
-    return "treinadorPages/perfilTreinador";
+    return "treinadorPages/dash.html";
+}
+
+ @GetMapping("/treinador/planilha")
+public String getTreinadorPlanilhas(@AuthenticationPrincipal UserDetails userLogado, Model model) {
+    
+   
+       TreinadorCustomer treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+
+
+    model.addAttribute("treinador", treinador);
+
+    return "treinadorPages/Planinhas.html";
+}
+
+ @GetMapping("/treinador/perfil")
+public String getTreinadorPerfil(@AuthenticationPrincipal UserDetails userLogado, Model model) {
+    
+    TreinadorCustomer treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+    CustomerNome treinadorNome =  serviceTre.buscarNomes(userLogado.getUsername());
+
+    model.addAttribute("treinador", treinador);
+    model.addAttribute("nomeTreinador", treinadorNome);
+
+    return "treinadorPages/Perfil.html";
 }
 
 }
