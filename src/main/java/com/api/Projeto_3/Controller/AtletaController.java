@@ -66,7 +66,7 @@ public class AtletaController {
 
         @GetMapping("/atleta")
         public String getBendoAtleta() {
-            return "atletaPages/atleBenvido.html";
+            return "atletaPages/dasAtleta";
         }
         
   }

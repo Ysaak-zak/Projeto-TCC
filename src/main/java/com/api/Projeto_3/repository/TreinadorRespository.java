@@ -27,6 +27,8 @@ public interface TreinadorRespository  extends JpaRepository<TreinadorModel,Long
                  +" WHERE per.cpf = :cpf "
                  , nativeQuery = true)
     public CustomerNome buscarNomes(String cpf);
+
+    
     
 
     

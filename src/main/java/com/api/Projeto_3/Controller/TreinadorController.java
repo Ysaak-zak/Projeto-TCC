@@ -1,5 +1,8 @@
 package com.api.Projeto_3.Controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -12,15 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.Projeto_3.dtos.enumDtos.EnumDtos;
 import com.api.Projeto_3.dtos.enumDtos.EnumGenero;
 import com.api.Projeto_3.dtos.interfaceCustomer.CustomerNome;
+import com.api.Projeto_3.dtos.interfaceCustomer.ListDasAtleta;
 import com.api.Projeto_3.dtos.interfaceCustomer.TreinadorCustomer;
 import com.api.Projeto_3.dtos.model.PerfilsDtos;
 import com.api.Projeto_3.dtos.model.RoleDtos;
 import com.api.Projeto_3.model.enums.EnumSague;
 import com.api.Projeto_3.model.enums.EnumUf;
+import com.api.Projeto_3.service.AtletaService;
 import com.api.Projeto_3.service.PerfilService;
 import com.api.Projeto_3.service.TreinadorService;
 
@@ -34,6 +40,8 @@ public class TreinadorController {
 
     @Autowired
     TreinadorService serviceTre;
+
+    @Autowired AtletaService atl_servic;
 
 
         @GetMapping("/cadastro/treinador/{id}")
@@ -75,10 +83,21 @@ public String postTreinadorInsert(@PathVariable("id")   Long id , @ModelAttribut
 public String getTreinador(@AuthenticationPrincipal UserDetails userLogado, Model model) {
     
    
-    //PerfilsDtos treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
     TreinadorCustomer treinador = serviceTre.buscarTreinadorPorId(userLogado.getUsername());
+    List<ListDasAtleta> listDas = serviceTre.listTab();
 
     model.addAttribute("treinador", treinador);
+    model.addAttribute("listaAtletas", listDas);
+
+    model.addAttribute("treinador_id_Vincule",treinador.getId());
+
+    final int v = atl_servic.quntAtletaVinculadosTreinador(treinador.getId());
+    model.addAttribute("vinculados_count",v);
+
+    final int vSem = atl_servic.quntAtletaSemVinculadosTreinador();
+    model.addAttribute("atleta_sem_Vinculacao",vSem);
+
+
 
     return "treinadorPages/dash.html";
 }
@@ -105,6 +124,13 @@ public String getTreinadorPerfil(@AuthenticationPrincipal UserDetails userLogado
     model.addAttribute("nomeTreinador", treinadorNome);
 
     return "treinadorPages/Perfil.html";
+}
+
+@PostMapping("/treinador/{treinadorId}/vincular-atleta/{atletaId}")
+public String vincularAtleta(@PathVariable("treinadorId") Long treinadorId, @PathVariable("atletaId") Long atletaId) {
+   atl_servic.insertFkATreinador(atletaId, treinadorId);
+
+    return "redirect:/treinador";
 }
 
 }

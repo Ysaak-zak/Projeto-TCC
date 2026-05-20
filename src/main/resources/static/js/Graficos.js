@@ -1,53 +1,45 @@
-var chart = JSC.chart('barras', {
-    debug: true,
-    defaultSeries_type: 'column',
-    legend_visible: false,
-    defaultPoint_label_visible: true,
-    yAxis_visible: false,
-    legend_visible: false,
-    defaultPoint_label_visible: true,
-    chartArea_fill: '#000000',
-    xAxis_defaultTick: {
-        placement: 'inside',
-        label_style: { color: '#fff', fontWeight: 'bold' }
-    },
-    series: [
-        {
-            name: 'GRAFICO UM',
-            palette: ['#4b0082', '#4b0082', '#4b0082', '#4b0082', '#4b0082', '#4b0082', '#4b0082'],
-            points: [
-                { name: 'DOMINGO', y: 15 },
-                { name: 'SEGUNDA', y: 15 },
-                { name: 'TERÇA', y: 118 },
-                { name: 'QUARTA', y: 130 },
-                { name: 'QUINTA ', y: 123 },
-                { name: 'SEXTA', y: 123 },
-                { name: 'SABADO ', y: 123 }
+     window.onload = function() {
+            JSC.chart('barras', {
+                debug: false,
+                type: 'column',
+                legend_visible: false,
+                palette: ['#8b5cf6'],
+                axisX_label_text: 'Dias',
+                axisY_label_text: 'Minutos',
+                series: [
+                    {
+                        name: 'Tempo',
+                        points: [
+                            {x: 'Seg', y: 60},
+                            {x: 'Ter', y: 45},
+                            {x: 'Qua', y: 90},
+                            {x: 'Qui', y: 0},
+                            {x: 'Sex', y: 75},
+                            {x: 'Sab', y: 120},
+                            {x: 'Dom', y: 30}
+                        ]
+                    }
+                ],
+                chartArea_fill: 'transparent',
+                defaultPoint_label_visible: true
+            });
 
-            ]
-        }
-    ]
-});
-
-
-
-var chart = JSC.Chart('pizza', {
-    debug: true,
-     chartArea_fill: '#000000',
-    legend: {
-        visible: false
-    },
-    defaultSeries: { type: 'pie', pointSelection: true },
-    defaultPoint_label_text: '<b>%name</b>',
-    series: [
-        {
-            points: [
-                { name: 'Aerobicos', y: 35, color: '#FF5733' },     
-                { name: 'Musculação', y: 30, color: '#33FF57' },    
-                { name: 'Funcionais', y: 20, color: '#3357FF' },    
-                { name: 'Flexibilidade', y: 10, color: '#FFBD33' },
-                { name: 'Equilibrio', y: 5 }
-            ]
-        }
-    ]
-});
+            JSC.chart('pizza', {
+                debug: false,
+                type: 'pie',
+                legend_position: 'right',
+                palette: ['#8b5cf6', '#3b82f6', '#f472b6', '#10b981'],
+                series: [
+                    {
+                        name: 'Categorias',
+                        points: [
+                            {x: 'Força', y: 40},
+                            {x: 'Cardio', y: 30},
+                            {x: 'Flexibilidade', y: 15},
+                            {x: 'Funcional', y: 15}
+                        ]
+                    }
+                ],
+                chartArea_fill: 'transparent'
+            });
+        };
